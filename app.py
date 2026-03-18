@@ -1,23 +1,17 @@
 import streamlit as st
 
-# Streamlit handles the 'index' and 'routing' automatically
 st.title("Iris Flower Predictor")
 
-# Instead of index.html, you build the UI here
-st.write("Welcome to the predictor! Use the sidebar to enter values.")
+# --- CREATE THE SIDEBAR INPUTS ---
+st.sidebar.header("Input Flower Features")
 
-# Add your prediction logic here...
+sepal_length = st.sidebar.slider("Sepal Length", 4.0, 8.0, 5.4)
+sepal_width = st.sidebar.slider("Sepal Width", 2.0, 4.5, 3.4)
+petal_length = st.sidebar.slider("Petal Length", 1.0, 7.0, 1.3)
+petal_width = st.sidebar.slider("Petal Width", 0.1, 2.5, 0.2)
 
-import os  # Fixed: 'import os' must be on its own line
-from flask import Flask, render_template
+# --- SHOW THE DATA ON MAIN PAGE ---
+st.write("### Current Input Values:")
+st.write(f"Sepal: {sepal_length} x {sepal_width} | Petal: {petal_length} x {petal_width}")
 
-app = Flask(__name__)
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-if __name__ == '__main__':
-    # This works on Render/Railway, but NOT on Streamlit Cloud
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+# Add your prediction logic below this line...
